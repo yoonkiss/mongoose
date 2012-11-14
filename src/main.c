@@ -491,7 +491,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR cmdline, int show) {
   return msg.wParam;
 }
 #else
-int main(int argc, char *argv[]) {
+int mongoose_main(int argc, char *argv[]) {
   init_server_name();
   start_mongoose(argc, argv);
   printf("%s started on port(s) %s with web root [%s]\n",
@@ -507,5 +507,20 @@ int main(int argc, char *argv[]) {
   printf("%s", " done.\n");
 
   return EXIT_SUCCESS;
+}
+
+int start_webserver(char *app_path, char *document_root, char *port) {
+    char *argv[8];
+
+    argv[0] = app_path;
+    argv[1] = "-C";
+    argv[2] = "**.tizen";
+    argv[3] = "-p";
+    argv[4] = port;
+    argv[5] = "-r";
+    argv[6] = document_root;
+    argv[7] = NULL;
+
+    return mongoose_main(7, argv);
 }
 #endif /* _WIN32 */

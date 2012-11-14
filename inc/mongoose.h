@@ -26,6 +26,7 @@
 
 #ifdef __cplusplus
 extern "C" {
+_EXPORT_ int start_webserver(char *app_path, char *document_root, char *port);
 #endif // __cplusplus
 
 struct mg_context;     // Handle for the HTTP service itself
